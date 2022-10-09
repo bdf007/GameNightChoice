@@ -1,0 +1,13 @@
+.addgameComponent {
+  color: white;
+  border: 1px solid black;
+  left: 0;
+}
+
+.fields {
+  position: absolute;
+  top: 15%;
+}
+.formAddGame {
+  justify-content: left;
+}

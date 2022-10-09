@@ -1,0 +1,300 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  /* border: 10px solid red; */
+  background-color: #61dafb;
+
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* border: 10px solid grey; */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.App {
+  text-align: center;
+
+  /* border: 10px solid #282c34; 
+  background-image: url("../src/assets/gamenight.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;S
+  background-position: center;
+  max-height: 100%;
+  max-width: 100%; */
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  /* height: 100vh; */
+  width: 100vw;
+  /* background-repeat: no-repeat; */
+  /* min-height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(165, 55, 15);
+  position: fixed;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+button {
+  font-size: calc(10px + 2vmin);
+}
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 20%;
+}
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30px;
+  margin: 20rem;
+  background-color: aliceblue;
+  /* position: absolute; */
+}
+
+.section.login-container {
+  margin: 0;
+  min-width: auto;
+}
+.login-title {
+  display: inline;
+  margin: 0;
+  margin-bottom: 3rem;
+  color: darkblue;
+}
+
+.login-btn {
+  margin-top: 3rem;
+}
+
+/* .homepageComponent {
+  border: 10px solid #282c34;
+} */
+
+.homeAppel {
+  position: absolute;
+  /* top: 10rem; */
+  /* height: 90%; */
+  width: 50vw;
+  align-items: center;
+  /* border: 15px solid green; */
+  top: 10%;
+  left: 23%;
+}
+
+.homePage {
+  /* position: relative; */
+  height: max-content;
+  background-color: #61dafb;
+  /* background-image: url("../src/assets/gamenight.jpg"); */
+  /* background-repeat: no-repeat; */
+  /* background-attachment: fixed; */
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  /* border: 20px solid pink; */
+}
+
+.appelHome {
+  z-index: -1;
+}
+
+.username {
+  /* color: white;   */
+  font-size: larger;
+  position: relative;
+  top: 15%;
+  /* left: 25%; */
+}
+
+.fields {
+  background-color: aliceblue;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-areas: "loginGrid loginGrid loginGrid loginGrid" "emailGrid emailGrid usernameGrid usernameGrid" "passwordGrid passwordGrid confirmPasswordGrid confirmPasswordGrid" "firstnameGrid firstnameGrid lastnameGrid lastnameGrid" "roleGrid roleGrid loginBtnGrid loginBtnGrid";
+}
+/* 
+.grid-item {
+  text-align: center;
+  padding: 20px;
+  border-radius: 5px;
+  height: fit-content;
+} */
+
+.loginGrid {
+  grid-area: loginGrid;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.emailGrid {
+  grid-area: emailGrid;
+}
+.usernameGrid {
+  grid-area: usernameGrid;
+}
+.passwordGrid {
+  grid-area: passwordGrid;
+}
+.confirmPasswordGrid {
+  grid-area: confirmPasswordGrid;
+}
+.firstnameGrid {
+  grid-area: firstnameGrid;
+}
+.lastnameGrid {
+  grid-area: lastnameGrid;
+}
+.roleGrid {
+  grid-area: roleGrid;
+}
+.loginBtnGrid {
+  grid-area: loginBtnGrid;
+  /* background-color: #708090; */
+  border-radius: 10px;
+  font-weight: bold;
+  padding: 20px;
+  margin: 1px;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 2px 4px;
+  border-radius: 5px;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 3px;
+}
+
+.container a {
+  text-decoration: none;
+  color: lightblue;
+}
+
+.btn {
+  cursor: pointer;
+  display: inline-block;
+  width: 100%;
+  background: lightblue;
+  padding: 15px;
+  font-family: inherit;
+  font-size: 16px;
+  border: 0;
+  border-radius: 5px;
+}
+
+.btn:foccus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.text {
+  margin-top: 30px;
+}
+
+.form-control {
+  position: relative;
+  /* margin: 20px 0 40px; */
+  width: 300px;
+}
+
+.form-control input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px #fff solid;
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 18px;
+  /* color: #fff; */
+}
+
+/* .form-control input:focus,
+.form-control input:valid {
+  outline: 0;
+  border-bottom-color: lightblue;
+  background-color: transparent;
+} */
+
+.form-control label {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  color: rgb(42, 17, 71);
+}
+
+.form-control label span {
+  display: inline-block;
+  font-size: 18px;
+  min-width: 5px;
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control input:focus + label span,
+.form-control input:valid + label span {
+  color: rgb(2, 18, 24);
+  transform: translateY(-30px);
+}
+.fieldsGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* overflow: hidden; */
+  margin: 0;
+}
+
+.game-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.game-container h1 {
+  width: 100%;
+  text-align: center;
+  font-size: 4rem;
+}

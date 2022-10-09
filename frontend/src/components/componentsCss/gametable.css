@@ -1,0 +1,60 @@
+.userListGame {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game {
+  background-color: hsl(0, 82%, 24%);
+  border-radius: 3px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  margin: 1rem;
+  overflow: hidden;
+  position: relative;
+  width: 300px;
+  min-height: 20rem;
+}
+
+.game img {
+  max-width: 100%;
+}
+
+.game-info {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-info h3 {
+  box-shadow: none;
+  margin: 0;
+  text-decoration: none;
+}
+
+.game-info span {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 3px;
+  padding: 0.5rem;
+}
+
+.game-over {
+  background-color: white;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  max-height: 100%;
+  overflow: auto;
+  padding: 1rem;
+  bottom: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  text-align: justify;
+  transform: translateY(105%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.game:hover .game-over {
+  transform: translateY(0);
+}
