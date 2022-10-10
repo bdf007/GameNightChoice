@@ -34,7 +34,7 @@ class UserController {
 
     try {
       // TODO validations (length, format...)
-      console.warn(id, password, role);
+      console.warn("id", id, password, role);
       const validUser = await models.users.validate(
         { id, password, role },
         false
@@ -108,7 +108,6 @@ class UserController {
   };
 
   static delete = (req, res) => {
-    console.log("delete", req.params.id);
     models.users
       .delete(req.params.id)
       .then(() => {

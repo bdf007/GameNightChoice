@@ -11,24 +11,6 @@ export default function GameTable(idUser) {
   const [games, setGames] = useState([]);
   const [search, setSearch] = useState("");
 
-  useEffect(() => {
-    const gamesCards = document.querySelectorAll(".game");
-
-    function checkGameCards() {
-      const triggerBottom = (window.innerHeight / 5) * 4;
-      gamesCards.forEach((game) => {
-        const gameCardTop = game.getBoundingClientRect().top;
-        if (gameCardTop < triggerBottom) {
-          game.classList.add("show");
-        } else {
-          game.classList.remove("show");
-        }
-      });
-    }
-    window.addEventListener("scroll", checkGameCards);
-    checkGameCards();
-  }, []);
-
   const getGames = async () => {
     try {
       const { data } = await axios.get(`userhasgame/${UserId}`, {
@@ -44,7 +26,21 @@ export default function GameTable(idUser) {
     }
   };
 
+  function checkGameCards() {
+    const gamesCards = document.querySelectorAll(".game");
+    const triggerBottom = (window.innerHeight / 5) * 4;
+    gamesCards.forEach((game) => {
+      const gameCardTop = game.getBoundingClientRect().top;
+      if (gameCardTop < triggerBottom) {
+        game.classList.add("show");
+      } else {
+        game.classList.remove("show");
+      }
+    });
+  }
   useEffect(() => {
+    window.addEventListener("scroll", checkGameCards);
+    checkGameCards();
     getGames();
   }, [search]);
 

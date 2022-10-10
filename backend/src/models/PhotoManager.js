@@ -26,7 +26,6 @@ class PhotoManager extends AbstractManager {
 
   insert(photo) {
     // eslint-disable-next-line no-restricted-syntax
-    console.log("insert photo", photo);
     return this.connection.query(
       `INSERT INTO photos (description, name, games_id) VALUES (?, ?, ?)`,
       [photo.description, photo.name, photo.games_id]

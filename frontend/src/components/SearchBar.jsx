@@ -2,9 +2,10 @@
 function Search({ searchValue, setSearchValue }) {
   return (
     <div className="searchBar">
-      <label htmlFor="search">Search : </label>
+      <div htmlFor="search" className="fas fa-search" />
       <input
         type="text"
+        className="input"
         id="searchBar"
         placeholder="Search"
         value={searchValue}

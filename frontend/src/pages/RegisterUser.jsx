@@ -197,19 +197,6 @@ export default function RegisterUser() {
               />
               <label htmlFor="lastname">Lastname: </label>
             </div>
-            {/* <div className="grid-item roleGrid form-control">
-              <select
-                id="role"
-                value={state.role}
-                onChange={(e) =>
-                  dispatch({ type: "UPDATE_ROLE", payload: e.target.value })
-                }
-              >
-                <option value="USER">USER</option>
-                <option value="ADMIN">ADMIN</option>
-              </select>
-              <label htmlFor="role">Role:</label>
-            </div> */}
             <div className="grid-item loginBtnGrid">
               <div className="form-control">
                 <button className="login-btn" type="submit">

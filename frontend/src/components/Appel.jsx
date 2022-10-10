@@ -13,7 +13,6 @@ function Appel() {
           "https://api.boardgameatlas.com/api/search?random=true&client_id=073Uwaw73T"
         )
         .then((res) => {
-          // const games = res.data;
           return setData(res.data);
         });
     } catch (err) {
@@ -31,11 +30,15 @@ function Appel() {
 
   return (
     <div className="appelHome">
-      {/* <h1>APPEL API BOARDGAMEATLAS</h1> */}
       {data ? (
-        <CardGame data={data.games[0]} />
+        <>
+          <CardGame data={data.games[0]} />
+          <button type="button" onClick={() => window.location.reload()}>
+            New Proposition
+          </button>
+        </>
       ) : (
-        <p>L'API n'est pas disponible actuellement</p>
+        <p>API doesn't work now sorry. Try later</p>
       )}
     </div>
   );

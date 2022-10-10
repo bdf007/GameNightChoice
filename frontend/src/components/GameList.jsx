@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { userContext } from "../contexts/UserContext";
 import axios from "../services/axios";
-import Addgame from "../components/Addgame";
-import "../components/componentsCss/GameList.css";
-import SearchBar from "../components/SearchBar";
+import Addgame from "./Addgame";
+import "./componentsCss/gametable.css";
+import SearchBar from "./SearchBar";
 
 export default function GameList() {
   const [games, setGames] = useState([]);
@@ -26,19 +26,26 @@ export default function GameList() {
     }
     setLoading(false);
   };
-
+  function checkGameCards() {
+    const gamesCards = document.querySelectorAll(".game");
+    const triggerBottom = (window.innerHeight / 5) * 4;
+    gamesCards.forEach((game) => {
+      const gameCardTop = game.getBoundingClientRect().top;
+      if (gameCardTop < triggerBottom) {
+        game.classList.add("show");
+      } else {
+        game.classList.remove("show");
+      }
+    });
+  }
   useEffect(() => {
+    window.addEventListener("scroll", checkGameCards);
+    checkGameCards();
     getGames();
   }, [search]);
 
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-  //   getGames();
-  // };
-
   return (
     <div className="gameList">
-      <h1>Game List</h1>
       {state.id && <Addgame setGames={setGames} />}
       <div>
         <SearchBar searchValue={search} setSearchValue={setSearch} />

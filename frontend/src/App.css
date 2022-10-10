@@ -27,14 +27,6 @@ code {
 
 .App {
   text-align: center;
-
-  /* border: 10px solid #282c34; 
-  background-image: url("../src/assets/gamenight.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;S
-  background-position: center;
-  max-height: 100%;
-  max-width: 100%; */
 }
 
 .App-logo {
@@ -43,10 +35,7 @@ code {
 }
 
 .App-header {
-  /* height: 100vh; */
   width: 100vw;
-  /* background-repeat: no-repeat; */
-  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,6 +60,8 @@ code {
 
 button {
   font-size: calc(10px + 2vmin);
+  border-radius: 1rem;
+  border: 0.2rem solid rgb(165, 55, 15);
 }
 .login {
   display: flex;
@@ -114,18 +105,19 @@ button {
   width: 50vw;
   align-items: center;
   /* border: 15px solid green; */
-  top: 10%;
+  top: 15%;
   left: 23%;
 }
 
 .homePage {
-  /* position: relative; */
+  position: relative;
   height: max-content;
   background-color: #61dafb;
   /* background-image: url("../src/assets/gamenight.jpg"); */
   /* background-repeat: no-repeat; */
   /* background-attachment: fixed; */
   background-position: center;
+  top: 5rem;
   height: 100vh;
   width: 100vw;
   /* border: 20px solid pink; */
@@ -146,6 +138,8 @@ button {
 .fields {
   background-color: aliceblue;
   display: grid;
+  border-radius: 1rem;
+  border: 0.2rem solid rgb(165, 55, 15);
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   grid-template-areas: "loginGrid loginGrid loginGrid loginGrid" "emailGrid emailGrid usernameGrid usernameGrid" "passwordGrid passwordGrid confirmPasswordGrid confirmPasswordGrid" "firstnameGrid firstnameGrid lastnameGrid lastnameGrid" "roleGrid roleGrid loginBtnGrid loginBtnGrid";
@@ -296,5 +290,16 @@ button {
 .game-container h1 {
   width: 100%;
   text-align: center;
-  font-size: 4rem;
+  font-size: 3rem;
+}
+
+.admin {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  /* overflow: hidden; */
+  margin: 0;
 }

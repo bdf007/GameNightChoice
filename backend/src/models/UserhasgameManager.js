@@ -21,10 +21,9 @@ class UserhasgameManager extends AbstractManager {
 
   findAllGamesByUser(id) {
     const idUser = parseInt(id, 10);
-    return this.connection.query(
-      `SELECT g.name AS gameName FROM games AS g LEFT JOIN users_has_games AS uhg ON g.id=uhg.games_id WHERE uhg.users_id=?`,
-      [idUser]
-    );
+    const sql =
+      "SELECT g.name AS gameName FROM games AS g LEFT JOIN users_has_games AS uhg ON g.id=uhg.games_id WHERE uhg.users_id=?";
+    return this.connection.query(sql, [idUser]);
   }
 
   insert(users_has_games) {

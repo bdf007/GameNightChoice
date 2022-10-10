@@ -5,10 +5,9 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  /* font-size: 30px; */
-  /* justify-items: space-around; */
-  /* justify-content: space-evenly; */
+  font-size: 30px;
   align-items: center;
+  text-align: center;
   width: 98%;
   /* height: 80vh; */
   /* color: coral; */

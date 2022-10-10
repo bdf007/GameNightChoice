@@ -2,33 +2,33 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable import/no-unresolved */
 import React, { useReducer, useState } from "react";
+import { useNavigate } from "react-router";
 import axios from "../services/axios";
 import gameReducer, { initialGameState } from "../reducers/gameReducer";
 import { userContext } from "../contexts/UserContext";
 import "@components/componentsCss/addgame.css";
 
 function Addgame({ setGames }) {
+  const navigate = useNavigate();
   const [gamestate, dispatch] = useReducer(gameReducer, initialGameState);
-  const [containt, setContaint] = useState("");
-  const [filename, setFile] = useState("");
+  const [file, setFile] = useState("");
   const [fileOverview, setFileOverview] = useState(null);
   const { state } = userContext();
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0].name);
+    setFile(e.target.files[0]);
     setFileOverview(URL.createObjectURL(e.target.files[0]));
   };
 
   const upLoadPhoto = async (idGame) => {
-    const fileName = { name: filename };
-    const fileDescription = { description: JSON.stringify(filename) };
-    const fileGameId = { games_id: idGame };
-
-    const newPhoto = Object.assign(fileDescription, fileGameId, fileName);
+    const photoData = new FormData();
+    const fileDescription = file.name;
+    photoData.append("description", fileDescription);
+    photoData.append("games_id", idGame);
+    photoData.append("file", file);
     try {
-      await axios.post("photo", newPhoto).then(() => {
+      await axios.post("photo", photoData).then(() => {
         setFile("");
-        setContaint("");
       });
     } catch (error) {
       console.error(error);
@@ -51,7 +51,7 @@ function Addgame({ setGames }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (!filename) {
+    if (!file) {
       return console.error("An image is required");
     }
     if (!gamestate) {
@@ -71,13 +71,12 @@ function Addgame({ setGames }) {
         .post("game", gameData)
         .then((res) => res.data)
         .then((data) => {
-          const idGame = data.id;
-
-          upLoadPhoto(idGame);
-          addUserHasGame(idGame);
+          upLoadPhoto(data.id);
+          addUserHasGame(data.id);
           setFileOverview(null);
           document.getElementById("file").value = null;
           dispatch({ type: "RESET_FORM" });
+          navigate("/userhasgame");
           return console.error("Game added successfully");
         });
     } catch (err) {

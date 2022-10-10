@@ -40,7 +40,7 @@ class GameManager extends AbstractManager {
 
   findOneWithPhotos(id) {
     return this.connection.query(
-      `SELECT g.id, g.name, g.playerNumber, g.gameplayStyle, g.editor, g.ages, g.duration, p.id AS photoId, p.description, p.name AS photoName FROM games AS g JOIN photos AS p ON g.id=p.games_id WHERE g.id=?`,
+      `SELECT g.id, g.name, g.playerNumber, g.gameplayStyle, g.editor, g.ages, g.duration, p.id AS photoId, p.description, p.name AS photoName FROM games AS g LEFT JOIN photos AS p ON g.id=p.games_id WHERE g.id=?`,
       [id]
     );
   }

@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { Navigate } from "react-router";
 import { useState, useEffect } from "react";
 import { userContext } from "../contexts/UserContext";
@@ -10,58 +11,41 @@ function Admin() {
   }
 
   const [users, setUsers] = useState([]);
-  // const [games, setGames] = useState([]);
 
-  // const getGamesByuser = (id) => {
-  //   console.log("id getgames", id);
-  //   try {
-  //     const { data } = axios.get(`userhasgame/user/${id}`, {
-  //       withCredentials: true,
-  //     });
-  //     console.log("data", data);
-  //     setGames(data);
-  //     console.log("games", data);
-  //   } catch (err) {
-  //     console.error(err);
-  //     // if (err.response.status === 401) {
-  //     //   console.error("You're not authenticated");
-  //     // } else if (err.response.status === 403) {
-  //     //   console.error("You're not authorized");
-  //     // }
-  //   }
-  // };
+  const getGamesByuser = async (id) => {
+    try {
+      const { data } = await axios.get(`userhasgame/${id}`, {
+        withCredentials: true,
+      });
+      const gamesLists = [];
+      for (let i = 0; i < data.length; i += 1) {
+        gamesLists.push(data[i].name);
+      }
+      const gamesListConcat = gamesLists.join(", ");
+      return gamesListConcat;
+    } catch (err) {
+      console.error(err);
+      // if (err.response.status === 401) {
+      //   console.error("You're not authenticated");
+      // } else if (err.response.status === 403) {
+      //   console.error("You're not authorized");
+      // }
+    }
+    return null;
+  };
 
-  // const getListgamesByuser = () => {
-  //   console.log("usersgetlist", users);
-  //   try {
-  //     for (let i = 0; i < users.length; i++) {
-  //       const iduser = parseInt(users[i].id, 10);
-  //       console.log("iduser", iduser);
-  //       getGamesByuser(iduser);
-  //       console.log("data", games);
-  //       const gameList = games;
-  //       users[i].gameList = gameList;
-  //     }
-
-  //     setGames([]);
-  //   } catch (err) {
-  //     console.error(err);
-  //     // if (err.response.status === 401) {
-  //     //   console.error("You're not authenticated");
-  //     // } else if (err.response.status === 403) {
-  //     //   console.error("You're not authorized");
-  //     // }
-  //   }
-  // };
-  // useEffect(() => {
-  //   getGamesByuser();
-  // }, []);
+  useEffect(() => {
+    getGamesByuser();
+  }, []);
 
   const getUsers = async () => {
     try {
       const { data } = await axios.get("user", { withCredentials: true });
+      for (let i = 0; i < data.length; i += 1) {
+        const iduser = parseInt(data[i].id, 10);
+        data[i].gamesListConcat = await getGamesByuser(iduser);
+      }
       setUsers(data);
-      // getListgamesByuser();
     } catch (err) {
       console.error("err", err);
       // if (err.response.status === 401) {
@@ -87,8 +71,6 @@ function Admin() {
 
   useEffect(() => {
     getUsers();
-    // getListgamesByuser();
-    // getGamesByuser();
   }, []);
 
   return (
@@ -97,14 +79,17 @@ function Admin() {
       <br />
       <br />
       <br />
-      <p>coucou admin</p>
+      <div className="fas fa-user-secret">WORK IN PROGRESS</div>
 
-      <section>
+      <section className="admin">
         {users.length ? (
           <ul>
             {users.map((user) => (
               <li key={user.id}>
-                {user.firstname} - {user.lastname} - {user.email}
+                <p>
+                  {user.firstname} - {user.lastname}
+                </p>
+                <p>{user.email}</p>
                 {/* {user.role === "USER" && (
                   <>
                     {/* <br />
@@ -114,20 +99,21 @@ function Admin() {
                     <br /> */}
                 {/* </> */}
                 {/* )} */}
-                {/* <ul>
-                  {user.gameList &&
-                    user.gameList.map((game) => (
-                      <li key={game.id}>
-                        {game.gameName}
-                        <br />
-                      </li>
-                    ))}
-                </ul> */}
+                <ul>
+                  {!user.gamesListConcat ? (
+                    <p>no games</p>
+                  ) : (
+                    <>
+                      <p>game owned :</p>
+                      <p>{user.gamesListConcat}</p>
+                    </>
+                  )}
+                </ul>
               </li>
             ))}
           </ul>
         ) : (
-          <h2>No Data to display</h2>
+          <p>No Data to display</p>
         )}
       </section>
     </div>

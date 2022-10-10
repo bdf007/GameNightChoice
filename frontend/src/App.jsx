@@ -6,10 +6,9 @@ import User from "./pages/User";
 import RegisterUser from "./pages/RegisterUser";
 import Admin from "./pages/Admin";
 import "./App.css";
-// import Search from "@pages/Search";
 import { userContext } from "./contexts/UserContext";
 import Navbar from "./components/navbar";
-import GameList from "./pages/GameList";
+import Search from "./pages/Search";
 
 function App() {
   const { state } = userContext();
@@ -21,7 +20,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<RegisterUser />} />
-          <Route path="/search" element={<GameList />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/search/game/:id" element={<GameDetail />} />
           <Route path="/detailGame/:id" element={<GameDetail />} />
           {state.id && (

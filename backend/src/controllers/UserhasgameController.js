@@ -38,14 +38,15 @@ class UserhasgameController {
   };
 
   static browseNameList = (req, res) => {
+    const iduser = req.params.id;
     models.users_has_games
-      .findAllGamesByUser(req.params.id)
+      .findAllGamesByUser(iduser)
       .then(([rows]) => {
         const result = [];
         rows.forEach((game) => {
           result.push(game.gameName);
         });
-        res.status(200).json(result);
+        return res.status(200).json(result);
       })
       .catch((err) => {
         console.error(err);

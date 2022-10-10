@@ -9,7 +9,7 @@ const models = require("../models");
 const postPhotoObject = (req, res, next) => {
   const storage = multer.diskStorage({
     destination: (_, file, cb) => {
-      cb(null, null, path.join(__dirname, "../../public/assets/images/"));
+      cb(null, path.join(__dirname, "../../public/assets/images/"));
     },
     filename: (_, file, cb) => {
       cb(null, `${Date.now()}-${file.originalname}`);
@@ -46,39 +46,39 @@ const deleteFile = (filename) => {
 };
 
 // Where Storage is located
-const storage = multer.diskStorage({
-  destination: (req, files, callback) => {
-    callback(null, path.join(__dirname, "../../public/assets/images/"));
-  },
-  filename: (req, files, callback) => {
-    req.body.name = `${Date.now()}_${files.originalname}`;
-    callback(null, req.body.name);
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: (req, files, callback) => {
+//     callback(null, path.join(__dirname, "../../public/assets/images/"));
+//   },
+//   filename: (req, files, callback) => {
+//     req.body.name = `${Date.now()}_${files.originalname}`;
+//     callback(null, req.body.name);
+//   },
+// });
 
-const checkFileType = (files, callback) => {
-  const filetypes = /jpeg|jpg|png/;
-  const extname = filetypes.test(
-    path.extname(files.originalname).toLowerCase()
-  ); // test() vérifie correspondance
-  const mimetype = filetypes.test(files.mimetype); // mimetype example : jpg => 'images/jpg'
+// const checkFileType = (files, callback) => {
+//   const filetypes = /jpeg|jpg|png/;
+//   const extname = filetypes.test(
+//     path.extname(files.originalname).toLowerCase()
+//   ); // test() vérifie correspondance
+//   const mimetype = filetypes.test(files.mimetype); // mimetype example : jpg => 'images/jpg'
 
-  if (extname && mimetype) {
-    return callback(null, true);
-  }
-  return callback(
-    "Error: Only images with the following extension : .jpeg, .jpg, .png"
-  );
-};
+//   if (extname && mimetype) {
+//     return callback(null, true);
+//   }
+//   return callback(
+//     "Error: Only images with the following extension : .jpeg, .jpg, .png"
+//   );
+// };
 
-// Multer stuff
-const upload = multer({
-  storage,
-  limits: { fileSize: 32000000 }, // Max size 32 Mo, here counted as bytes
-  fileFilter: (data, files, callback) => {
-    checkFileType(files, callback);
-  },
-}).single("image"); // <input name="image" type="file">
+// // Multer stuff
+// const upload = multer({
+//   storage,
+//   limits: { fileSize: 32000000 }, // Max size 32 Mo, here counted as bytes
+//   fileFilter: (data, files, callback) => {
+//     checkFileType(files, callback);
+//   },
+// }).single("image"); // <input name="image" type="file">
 
 class PhotoController {
   // CRUD : Create, Read, Update, Delete
@@ -109,16 +109,14 @@ class PhotoController {
 
   static postPhoto = async (req, res, next) => {
     const obj = JSON.parse(JSON.stringify(req.body));
-    console.log("obj", obj);
     const photo = {
-      name: obj.name,
+      name: req.imgName,
       description: obj.description,
       games_id: obj.games_id,
     };
-    console.log("photo", photo);
+
     try {
       const object = await models.photos.validate({ ...photo });
-      console.log("object", object);
       if (!object) {
         return res
           .status(400)
@@ -193,14 +191,11 @@ class PhotoController {
   };
 
   static uploadImage = (req, res, next) => {
-    console.log("req.body", req.body);
     postPhotoObject(req, res, (err) => {
       if (err) {
         return res.status(400).send(err);
       }
-      req.body = { name: req.body.name, ...JSON.parse(req.body.description) };
-      console.log("name", req.body.description);
-
+      req.imgName = req.file.filename;
       return next();
     });
   };

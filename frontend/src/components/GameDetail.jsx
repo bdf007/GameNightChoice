@@ -2,17 +2,20 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { userContext } from "../contexts/UserContext";
 import axios from "../services/axios";
+// import AddImage from "./addImages";
 
 function GameDetail() {
   const navigate = useNavigate();
   const { state } = userContext();
   const idParsed = parseInt(useParams().id, 10);
   const [game, setGame] = useState([]);
+  const [idPhoto, setIdPhoto] = useState(0);
 
   const getGame = async () => {
     try {
       await axios.get(`userhasgame/detailGame/${idParsed}`).then((res) => {
         setGame(res.data);
+        setIdPhoto(res.data[0].photoId);
       });
     } catch (err) {
       if (err.response.status === 401) {
@@ -55,9 +58,11 @@ function GameDetail() {
     }
   };
 
-  const deletephotos = async () => {
+  const deleteTotalyAdminGame = async () => {
+    const idPhotoParsed = parseInt(idPhoto, 10);
+
     try {
-      await axios.delete(`photos/${idParsed}`);
+      await axios.delete(`photo/${idPhotoParsed}`);
     } catch (err) {
       if (err.response.status === 401) {
         console.error("You're not authenticated");
@@ -65,12 +70,18 @@ function GameDetail() {
         console.error("You're not authorized");
       }
     }
-  };
-
-  const deleteTotalyAdminGame = async () => {
     try {
-      deleteuserhasgame();
-      deletephotos();
+      await axios.delete(`userhasgame/${idParsed}`).then(() => {
+        navigate(-1);
+      });
+    } catch (err) {
+      if (err.response.status === 401) {
+        console.error("You're not authenticated");
+      } else if (err.response.status === 403) {
+        console.error("You're not authorized");
+      }
+    }
+    try {
       await axios.delete(`game/${idParsed}`).then(() => {});
     } catch (err) {
       if (err.response.status === 401) {
@@ -90,7 +101,7 @@ function GameDetail() {
       <h1>Game Detail</h1>
       {game[0] ? (
         <>
-          <figure className="game" key={game[0].id}>
+          <figure className="game show" key={game[0].id}>
             {game[0].photoName ? (
               <img
                 src={`${import.meta.env.VITE_IMAGES_URL}${game[0].photoName}`}
@@ -101,8 +112,6 @@ function GameDetail() {
             )}
             <figcaption className="game-info">
               <h3>{game[0].gameName}</h3>
-              <p>{game[0].photoName}</p>
-              <p>{game[0].description}</p>
             </figcaption>
             <div>
               <h2>Overview: </h2>
@@ -130,9 +139,12 @@ function GameDetail() {
           )}
           <br />
           {state.role !== "ADMIN" ? null : (
-            <button type="button" onClick={deleteTotalyAdminGame}>
-              Delete game from database
-            </button>
+            <>
+              <button type="button" onClick={deleteTotalyAdminGame}>
+                Delete game from database
+              </button>
+              {/* <AddImage gameId={idParsed} /> */}
+            </>
           )}
         </>
       ) : (

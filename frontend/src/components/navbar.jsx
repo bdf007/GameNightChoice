@@ -28,22 +28,30 @@ export default function Navbar() {
     <nav className={`navbar ${showLinks ? "show-nav" : "hide-nav"}`}>
       <ul className="navbar_links">
         <li className="navbar_item slideInDown-1">
-          <Link to="/" className="navbar_link" onClick={handleShowLinks}>
-            Home
+          <Link
+            to="/"
+            className="navbar_link fas fa-home"
+            onClick={handleShowLinks}
+          >
+            {/* Home */}
           </Link>
         </li>
         <li className="navbar_item slideInDown-2">
           {!state.id ? (
-            <Link to="/login" className="navbar_link" onClick={handleShowLinks}>
-              Login
+            <Link
+              to="/login"
+              className="navbar_link fas fa-user"
+              onClick={handleShowLinks}
+            >
+              {/* Login */}
             </Link>
           ) : (
             <Link
               to="/home"
               onClick={({ handleDisconnect }, { handleShowLinks })}
-              className="navbar_link"
+              className="navbar_link fas fa-power-off"
             >
-              Logout
+              {/* Logout */}
             </Link>
           )}
         </li>
@@ -51,10 +59,10 @@ export default function Navbar() {
           <li className="navbar_item slideInDown-3">
             <Link
               to="/register"
-              className="navbar_link"
+              className="navbar_link fas fa-user-plus"
               onClick={handleShowLinks}
             >
-              Register
+              {/* Register */}
             </Link>
           </li>
         )}
@@ -62,18 +70,18 @@ export default function Navbar() {
           {!state.id ? (
             <Link
               to="/search"
-              className="navbar_link"
+              className="navbar_link fas fa-search"
               onClick={handleShowLinks}
             >
-              Search
+              {/* Search */}
             </Link>
           ) : (
             <Link
               to="/search"
-              className="navbar_link"
+              className="navbar_link fas fa-search-plus"
               onClick={handleShowLinks}
             >
-              Search and Add
+              {/* Search and Add */}
             </Link>
           )}
         </li>
@@ -81,17 +89,21 @@ export default function Navbar() {
           <li className="navbar_item slideInDown-5">
             <Link
               to="/userhasgame"
-              className="navbar_link"
+              className="navbar_link fas fa-gamepad"
               onClick={handleShowLinks}
             >
-              User
+              {/* User */}
             </Link>
           </li>
         )}
         {state.role === "ADMIN" && (
           <li className="navbar_item slideInDown-6">
-            <Link to="/admin" className="navbar_link" onClick={handleShowLinks}>
-              Admin
+            <Link
+              to="/admin"
+              className="navbar_link fas fa-user-shield"
+              onClick={handleShowLinks}
+            >
+              {/* Admin */}
             </Link>
           </li>
         )}

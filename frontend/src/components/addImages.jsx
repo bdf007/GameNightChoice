@@ -34,7 +34,6 @@ export default function AddImage({ gameId }) {
     const fileGameId = { games_id: idGame };
 
     const photoData = Object.assign(fileDescription, fileGameId, fileName);
-    console.log("photoData", photoData);
 
     try {
       await axios.post("photo", photoData);

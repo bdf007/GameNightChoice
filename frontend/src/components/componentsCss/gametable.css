@@ -1,19 +1,35 @@
 .userListGame {
   display: flex;
+  /* flex-direction: column; */
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+  margin: 0;
+  overflow-x: hidden;
 }
 
 .game {
-  background-color: hsl(0, 82%, 24%);
+  background-color: hsl(0, 37%, 48%);
   border-radius: 3px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   cursor: pointer;
   margin: 1rem;
   overflow: hidden;
-  position: relative;
-  width: 300px;
+  /* position: relative; */
+  width: 30rem;
   min-height: 20rem;
+  border-radius: 1rem;
+  box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.4);
+  transform: translateX(-400%);
+  transition: transform 0.4s ease;
+}
+
+.game:nth-of-type(even) {
+  transform: translateX(400%);
+}
+
+.game.show {
+  transform: translateX(0);
 }
 
 .game img {
@@ -23,14 +39,16 @@
 .game-info {
   display: flex;
   padding: 1rem;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .game-info h3 {
   box-shadow: none;
   margin: 0;
   text-decoration: none;
+  text-align: center;
 }
 
 .game-info span {
@@ -57,4 +75,24 @@
 
 .game:hover .game-over {
   transform: translateY(0);
+}
+
+.gameList {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.cardsGamesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
 }
