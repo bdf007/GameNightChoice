@@ -3,19 +3,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../services/axios";
 import { userContext } from "../contexts/UserContext";
+import "../App.css";
 
 export default function Login() {
-  const { dispatch } = userContext();
-  const navigate = useNavigate();
-  const [userData, setUserData] = useState({
-    email: "",
-    password: "",
-  });
-
   useEffect(() => {
-    const etiquette = document.querySelectorAll(".form-control label");
+    const labels = document.querySelectorAll(".form-control label");
 
-    etiquette.forEach((label) => {
+    labels.forEach((label) => {
       label.innerHTML = label.innerText
         .split("")
         .map(
@@ -25,6 +19,13 @@ export default function Login() {
         .join("");
     });
   }, []);
+
+  const { dispatch } = userContext();
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleInputChange = (e) => {
     setUserData((prevState) => ({
@@ -67,7 +68,7 @@ export default function Login() {
                 value={userData.email}
                 onChange={handleInputChange}
               />
-              <label htmlFor="username">Email</label>
+              <label htmlFor="email">Email :</label>
             </div>
             <div className="form-control">
               <input

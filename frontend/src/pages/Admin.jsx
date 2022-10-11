@@ -21,7 +21,7 @@ function Admin() {
       for (let i = 0; i < data.length; i += 1) {
         gamesLists.push(data[i].name);
       }
-      const gamesListConcat = gamesLists.join(", ");
+      const gamesListConcat = gamesLists.join(", - ");
       return gamesListConcat;
     } catch (err) {
       console.error(err);
@@ -86,10 +86,11 @@ function Admin() {
           <ul>
             {users.map((user) => (
               <li key={user.id}>
-                <p>
-                  {user.firstname} - {user.lastname}
-                </p>
-                <p>{user.email}</p>
+                <h2>
+                  Firstname : {user.firstname} - Lastname : {user.lastname}
+                </h2>
+                <p>Username : {user.username}</p>
+                <h3>Email : {user.email}</h3>
                 {/* {user.role === "USER" && (
                   <>
                     {/* <br />
@@ -104,7 +105,7 @@ function Admin() {
                     <p>no games</p>
                   ) : (
                     <>
-                      <p>game owned :</p>
+                      <h1>games owned :</h1>
                       <p>{user.gamesListConcat}</p>
                     </>
                   )}

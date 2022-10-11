@@ -20,7 +20,7 @@ function CardGame({ data }) {
             <p>Year : {data.year_published}</p>
             <p>
               <a href={data.url} target="_blank" rel="noreferrer">
-                BoardGameAtlas link
+                {data.name}
               </a>
             </p>
           </div>

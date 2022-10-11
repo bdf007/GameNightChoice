@@ -33,13 +33,10 @@ class UserController {
     const id = parseInt(req.params.id, 10);
 
     try {
-      // TODO validations (length, format...)
-      console.warn("id", id, password, role);
       const validUser = await models.users.validate(
         { id, password, role },
         false
       );
-      // console.warn(validUser);
       if (!validUser) {
         return res
           .status(400)
@@ -202,26 +199,6 @@ class UserController {
     }
 
     return next();
-  };
-
-  static editAvatar = async (req, res) => {
-    // on modifie l'user id 3
-    const userId = 3;
-
-    try {
-      const [result] = await models.user.updateAvatar({
-        id: userId,
-        avatar: req.pictureData.avatar,
-        avatarDescription: req.pictureData.description,
-      });
-      if (result.affectedRows === 0) {
-        return res.status(404).send("user not found");
-      }
-      const [[userUpdated]] = await models.user.find(userId);
-      return res.status(201).json(userUpdated);
-    } catch (err) {
-      return res.status(500).send(err.message);
-    }
   };
 }
 

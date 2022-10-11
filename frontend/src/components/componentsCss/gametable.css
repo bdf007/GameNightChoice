@@ -30,6 +30,7 @@
 
 .game.show {
   transform: translateX(0);
+  max-width: 30rem;
 }
 
 .game img {
@@ -63,11 +64,14 @@
   border-top-right-radius: 3px;
   max-height: 100%;
   overflow: auto;
-  padding: 1rem;
+  /* padding: 1rem; */
   bottom: 0;
   position: absolute;
   left: 0;
   right: 0;
+  width: fit-content;
+  padding: 0.3rem;
+
   text-align: justify;
   transform: translateY(105%);
   transition: transform 0.3s ease-in-out;

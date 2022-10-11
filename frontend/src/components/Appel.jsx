@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CardGame from "./CardGame";
-// import SearchBar from "./SearchBar";
 
 function Appel() {
   const [data, setData] = useState();

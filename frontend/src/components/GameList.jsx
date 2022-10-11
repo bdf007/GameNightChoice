@@ -50,14 +50,6 @@ export default function GameList() {
       <div>
         <SearchBar searchValue={search} setSearchValue={setSearch} />
       </div>
-      {/* <form onSubmit={handleSearch}>
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <button type="submit">Search</button>
-      </form> */}
       {loading && <p>Loading...</p>}
       {error && <p>Something went wrong</p>}
       {!loading && !error && (
