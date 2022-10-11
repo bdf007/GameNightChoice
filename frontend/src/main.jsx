@@ -9,7 +9,6 @@ import App from "./App";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  // <React.StrictMode>
   <UserContextProvider>
     <GameContextProvider>
       <BrowserRouter>
@@ -17,5 +16,4 @@ root.render(
       </BrowserRouter>
     </GameContextProvider>
   </UserContextProvider>
-  // </React.StrictMode>
 );
